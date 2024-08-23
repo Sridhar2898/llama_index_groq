@@ -11,9 +11,9 @@ get your groq key and put it in the environment variable \
 
 Now, 
 
-1. With python environment: 
-   a. pip install -r requirements.txt 
-   b. streamlit run app.py 
+1. With python environment \
+   a. pip install -r requirements.txt \
+   b. streamlit run app.py \
 
 2. Docker \
    docker build -t llama_groq_qa . \
