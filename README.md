@@ -9,12 +9,12 @@ get your groq key and put it in the environment variable \
 3. For Windows(powershell): \
    $env:GROQ_API_KEY="your-groq-api-key" \
 
-Now, \
+Now, 
 
-1. With python environment: \
+1. With python environment: 
 
-pip install -r requirements.txt \
-streamlit run app.py \
+   pip install -r requirements.txt 
+   streamlit run app.py 
 
 2. Docker \
    docker build -t llama_groq_qa . \
