@@ -5,6 +5,8 @@ from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, StorageCon
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core.node_parser import SentenceSplitter
 from llama_index.llms.groq import Groq
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from llama_index.core.node_parser import LangchainNodeParser
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -26,8 +28,13 @@ service_context = ServiceContext.from_defaults(embed_model=embed_model, llm=llm)
 VECTOR_DB_DIR = "./newdata"
 
 def create_vector_index(documents):
-    text_splitter = SentenceSplitter(chunk_size=1024, chunk_overlap=200)
-    nodes = text_splitter.get_nodes_from_documents(documents, show_progress=True)
+    text_splitter = RecursiveCharacterTextSplitter()
+    parser = LangchainNodeParser(RecursiveCharacterTextSplitter())
+    nodes = parser.get_nodes_from_documents(documents)
+
+    # text_splitter = SentenceSplitter(chunk_size=1024, chunk_overlap=200)
+    # nodes = text_splitter.get_nodes_from_documents(documents, show_progress=True)
+
     vector_index = VectorStoreIndex.from_documents(documents=documents, service_context=service_context, node_parser=nodes)
     vector_index.storage_context.persist(VECTOR_DB_DIR)
     return vector_index
