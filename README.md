@@ -13,7 +13,7 @@ Now,
 
 1. With python environment \
    a. pip install -r requirements.txt \
-   b. streamlit run app.py \
+   b. streamlit run app.py 
 
 2. Docker \
    docker build -t llama_groq_qa . \
